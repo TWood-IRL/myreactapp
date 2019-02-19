@@ -3,12 +3,12 @@ import 'firebase/database' ;
 import 'firebase/auth' ;  
 
 const config = {
-    apiKey: "AIzaSyCPKw_qdLWQES9nMgXKsn6KRr0njQGYK9M",
-    authDomain: "react-helloworld-177c4.firebaseapp.com",
-    databaseURL: "https://react-helloworld-177c4.firebaseio.com",
-    projectId: "react-helloworld-177c4",
-    storageBucket: "react-helloworld-177c4.appspot.com",
-    messagingSenderId: "729630627253"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId
   };
   firebase.initializeApp(config);
 
