@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Home from './Home' ; 
 import Welcome from './Welcome' ; 
 import Navigation from './Navigation' ; 
+import {Router} from '@reach/router' ; 
 class App extends Component {
 
   constructor(){
