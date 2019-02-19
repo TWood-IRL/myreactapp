@@ -1,3 +1,8 @@
 body {
-    background-color:  #c2e7f8; 
+    font-weight: 200 ; 
+}
+input, 
+nav-item {
+    font-weight: 200 ; 
+    line-height: 110% ; 
 }
