@@ -70,6 +70,12 @@ class App extends Component {
       });
   };
 
+  addMeeting = meetingName => {
+    const ref = firebase
+      .database()
+      .ref(`meetings/${this.state.user.uid}`);
+    ref.push({ meetingName: meetingName });
+  };
   render() {
     return (
       <div> 
@@ -90,7 +96,7 @@ class App extends Component {
         <Router> 
           <Home path="/" user={this.state.user} /> 
           <Login path="/login"  /> 
-          <Meeting path="/meetings"  /> 
+          <Meeting path="/meetings"  addMeeting={this.addMeeting}/> 
           <Register path="/register"  registerUser={this.registerUser}/> 
           <Login path="/login"  /> 
         </Router>
