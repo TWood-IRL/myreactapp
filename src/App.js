@@ -27,11 +27,16 @@ class App extends Component {
 
 
   componentDidMount(){
-    const ref = firebase.database().ref('user') ; 
-    ref.on('value', snapshot => {
-        let FBUser = snapshot.val() ; 
-        this.setState({user: FBUser}) ; 
-    })
+    firebase.auth().onAuthStateChanged(FBUser => {
+      if(FBUser){
+        this.setState({
+          user: FBUser, 
+          displayName: FBUser.displayName, 
+          userID: FBUser.uid 
+        });
+      }
+    });
+
   }
 
   registerUser = userName => {
@@ -48,14 +53,42 @@ class App extends Component {
       });
     });
   };
+
+  logOutUser = e => {
+    e.preventDefault();
+    this.setState({
+      displayName: null,
+      userID: null,
+      user: null
+    });
+
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigate('/login');
+      });
+  };
+
   render() {
     return (
       <div> 
-        <Navigation user={this.state.user} /> 
-        {this.state.user && <Welcome user={this.state.displayName} />}  
 
+
+
+
+        <Navigation
+          user={this.state.user}
+          logOutUser={this.logOutUser}
+        />
+        {this.state.user && (
+          <Welcome
+            userName={this.state.displayName}
+            logOutUser={this.logOutUser}
+          />
+        )}
         <Router> 
-          <Home path="/" user={this.state.displayName} /> 
+          <Home path="/" user={this.state.user} /> 
           <Login path="/login"  /> 
           <Meeting path="/meetings"  /> 
           <Register path="/register"  registerUser={this.registerUser}/> 
