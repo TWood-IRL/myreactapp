@@ -3,8 +3,8 @@ import FormError from './FormError' ;
 import firebase from './Firebase' ; 
 
 class Register extends Component{
-    constructor(){
-        super() ; 
+    constructor(props){
+        super(props) ; 
         this.state = {
             displayName : '' , 
             email: '' , 
@@ -14,7 +14,7 @@ class Register extends Component{
         } ; 
 
         this.handleChange = this.handleChange.bind(this) ; 
-        this.handleSubmit = this.handleSubmit.bind(this) ; 
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 handleChange(e){
@@ -30,24 +30,30 @@ handleChange(e){
     }) ; 
 }
 handleSubmit(e){
-   var registrationInfo = {
-    displayName : this.state.displayName , 
-    email: this.state.email , 
-    password : this.state.passOne , 
-    } ;  
-    e.preventDefault() ; 
-    firebase.auth().createUserWithEmailAndPassword(
-        registrationInfo.email, 
-        registrationInfo.password
-    ).catch(error => {
-        if(error.message !== null) {
-            this.setState({errorMessage :error.message})
-        }else{
-            this.setState({errorMessage : null }) ; 
-        }
-    }) ; 
-     
-}
+    var registrationInfo = {
+        displayName: this.state.displayName,
+        email: this.state.email,
+        password: this.state.passOne
+      };
+      e.preventDefault();
+  
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(
+          registrationInfo.email,
+          registrationInfo.password
+        )
+        .then(() => {
+          this.props.registerUser(registrationInfo.displayName);
+        })
+        .catch(error => {
+          if (error.message !== null) {
+            this.setState({ errorMessage: error.message });
+          } else {
+            this.setState({ errorMessage: null });
+          }
+        });
+    }
 
     render(){
 
