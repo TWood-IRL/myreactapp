@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Heroku 
-[Link](https//floating-peak-63498.herokuapp.com)
+[Link](https://floating-peak-63498.herokuapp.com)
 
 ## Available Scripts
 
