@@ -36,6 +36,11 @@ class MeetingList extends Component{
                     onClick={ () => navigate(`/checkin/${this.props.userID}/${item.meetingID}`)} >
                         <FaLink />
                     </button> 
+                    <button className="btn btn-sm btn-outline-secondary" 
+                    title="Attendees list" 
+                    onClick={ () => navigate(`/attendees/${this.props.userID}/${item.meetingID}`)} >
+                        <GoListUnordered />
+                    </button>
                 </section>
                 <section className="pl-3  text-left align-self-center" >
                     {item.meetingName}
