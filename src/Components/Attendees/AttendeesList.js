@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { GoTrashcan } from 'react-icons/go';
+import { GoTrashcan, GoStar } from 'react-icons/go';
 import firebase from '../Firebase/Firebase';
 
 
@@ -7,6 +7,7 @@ class AttendeesList extends Component{
     constructor(props){
         super(props) ; 
         this.deleteAttendee = this.deleteAttendee.bind(this) ; 
+        this.toggleStar = this.toggleStar.bind(this) ; 
     }
     deleteAttendee = (e, whichMeeting, whichAttendee) => {
         e.preventDefault();
@@ -21,6 +22,17 @@ class AttendeesList extends Component{
             `meetings/${adminUser}/${whichMeeting}/attendees/${whichAttendee}`
           );
         ref.remove();
+    }
+    toggleStar = (e, star,whichMeeting, whichAttendee) => {
+        e.preventDefault();
+        const adminUser = this.props.adminUser ; 
+        const ref = firebase.database().ref(`meetings/${adminUser}/${whichMeeting}/attendees/${whichAttendee}/star`); 
+        if(star === undefined){
+            ref.set(true) ;
+        }
+        else{
+            ref.set(!star) ;
+        }
     }
 
     render(){
@@ -39,6 +51,18 @@ class AttendeesList extends Component{
                                     onClick={e => this.deleteAttendee(e,this.props.meetingID,item.attendeeID  )}
                                     >
                                         <GoTrashcan/>
+                                    </button>
+
+                                    <button className={
+                                        '"btn btn-sm ' + (item.star ? 'btn-info' : 'btn-outline-secondary' ) 
+                                    }
+                                    title="Delete attendee"
+                                    onClick={e => this.toggleStar(e,
+                                        item.star,
+                                        this.props.meetingID,
+                                        item.attendeeID  )}
+                                    >
+                                        <GoStar/>
                                     </button>
                                 </div>
                                 )}
