@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { GoTrashcan, GoStar } from 'react-icons/go';
+import { GoTrashcan, GoStar, GoMail } from 'react-icons/go';
 import firebase from '../Firebase/Firebase';
 
 
@@ -40,7 +40,7 @@ class AttendeesList extends Component{
         const attendees = this.props.attendees ; 
         const myAttendees = attendees.map(item => {
             return(
-                <div className="col-8 col-sm-6 col-md-4 col-lg-3 mb-2 p-0 px-1"  key={item.attendeeID}>
+                <div className="col-8 col-sm-8 col-md-8 col-lg-8 mb-2 p-0 px-1"  key={item.attendeeID}>
                     <div className="card ">
                             <div className={
                                 'card-body px-3 py-2 d-flex align-items-center' + (admin ? '' : 'justify-content-center' )
@@ -64,6 +64,8 @@ class AttendeesList extends Component{
                                     >
                                         <GoStar/>
                                     </button>
+                                    <a href={`mailto:${item.attendeeEmail}`} className="btn btn-sm btn-outline-secondary" title="Mail Attendee" >
+                                    <GoMail/></a>
                                 </div>
                                 )}
                                 <div>{item.attendeeName}</div>
