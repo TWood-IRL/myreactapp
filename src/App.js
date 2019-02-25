@@ -10,7 +10,6 @@ import Navigation from './Components/Navigation/Navigation' ;
 import Login from './Components/Login/Login' ; 
 import Meeting from './Components/Meeting/Meeting' ; 
 import Register from './Components/Register/Register' ;
-import { FaSnapchat } from 'react-icons/fa';
 
 
 
@@ -121,7 +120,9 @@ class App extends Component {
         <Router> 
           <Home path="/" user={this.state.user} /> 
           <Login path="/login"  /> 
-          <Meeting path="/meetings"  addMeeting={this.addMeeting}/> 
+          <Meeting path="/meetings"  addMeeting={this.addMeeting} 
+          meetings={this.state.meetings}
+          /> 
           <Register path="/register"  registerUser={this.registerUser}/> 
           <Login path="/login"  /> 
         </Router>
