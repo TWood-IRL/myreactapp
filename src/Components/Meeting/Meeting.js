@@ -1,7 +1,4 @@
 import React, {Component} from 'react'
-import firebase from '../Firebase/Firebase' ;
-import FormError from '../Form/FormError' ; 
-import {navigate } from '@reach/router' ; 
 
 class Meeting extends Component{
     constructor(props){

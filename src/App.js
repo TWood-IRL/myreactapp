@@ -10,6 +10,7 @@ import Navigation from './Components/Navigation/Navigation' ;
 import Login from './Components/Login/Login' ; 
 import Meeting from './Components/Meeting/Meeting' ; 
 import Register from './Components/Register/Register' ;
+import { FaSnapchat } from 'react-icons/fa';
 
 
 
@@ -34,6 +35,30 @@ class App extends Component {
           displayName: FBUser.displayName, 
           userID: FBUser.uid 
         });
+
+        const meetingRef = firebase.database().ref('meetings/' + FBUser.uid);  
+
+        meetingRef.on('value', snapshot => {
+          let meetings = snapshot.val() ; 
+          let meetingsList = [] ; 
+
+          for(let item in meetings){
+              meetingsList.push({
+                meetingID: item, 
+                meetingName : meetings[item].meetingName 
+              }); 
+            
+          }
+
+          this.setState({
+              meetings: meetingsList, 
+              howManyMeetings : meetingsList.length
+          });
+
+        })
+      }
+      else{
+        this.setState({user: null }) ; 
       }
     });
 
