@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import firebase from '../Firebase/Firebase';
 import AttendeesList from './AttendeesList' ; 
-
+import {FaUndo} from 'react-icons/fa' ; 
 class Attendees extends Component{
     constructor(props){
         super(props) ; 
@@ -11,12 +11,16 @@ class Attendees extends Component{
 
         } ; 
         this.handleChange = this.handleChange.bind(this) ; 
+        this.resetQuery = this.resetQuery.bind(this) ; 
       
     }
     handleChange(e){
         const itemName = e.target.name ; 
         const itemValue = e.target.value ; 
         this.setState({[itemName]: itemValue}) ; 
+    }
+    resetQuery(e){
+        this.setState({searchQuery: '' }) ; 
     }
     componentDidMount(){
         const ref = firebase.database().ref(`meetings/${this.props.userID}/${this.props.meetingID}/attendees`) ; 
@@ -57,7 +61,12 @@ class Attendees extends Component{
                     </h1>
                     <div className="card bg-light mb-4" >
                         <div className="card-body text-center">
-                            <input  type="text" name="searchQuery" value={this.state.searchQuery} placeholder="Search Attendees" className="form-control" onChange={this.handleChange}   />
+                            <div className="input-group input-group-lg">
+                                <input  type="text" name="searchQuery" value={this.state.searchQuery} placeholder="Search Attendees" className="form-control" onChange={this.handleChange}   />
+                                <div className="input-group-append">
+                                    <button className="btn btn-sm btn-outline-info" title="Reset Search" onClick={() =>this.resetQuery()} ><FaUndo/></button>
+                                </div> 
+                            </div>
                         </div> 
                     </div>
 
