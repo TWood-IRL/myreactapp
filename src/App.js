@@ -11,6 +11,7 @@ import Login from './Components/Login/Login' ;
 import Meeting from './Components/Meeting/Meeting' ; 
 import Register from './Components/Register/Register' ;
 import CheckIn from './Components/Meeting/CheckIn' ;
+import Attendees from './Components/Attendees/Attendees' ;
 
 
 
@@ -122,11 +123,14 @@ class App extends Component {
           <Home path="/" user={this.state.user} /> 
           <Login path="/login"  /> 
           <Meeting path="/meetings"  
-          addMeeting={this.addMeeting} 
-          userID={this.state.userID}
-          meetings={this.state.meetings}
+            addMeeting={this.addMeeting} 
+            userID={this.state.userID}
+            meetings={this.state.meetings}
           /> 
           <CheckIn path="/checkin/:userID/:meetingID"  
+          /> 
+          <Attendees path="/attendees/:userID/:meetingID" 
+            adminUser={this.state.userID} 
           /> 
           <Register path="/register"  registerUser={this.registerUser}/> 
           <Login path="/login"  /> 
