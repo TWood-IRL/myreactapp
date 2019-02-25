@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
  
 import {Router,navigate} from '@reach/router' ;
-import firebase from './Firebase' ; 
+import firebase from './Components/Firebase/Firebase' ; 
 
-import Home from './Home' ; 
-import Welcome from './Welcome' ; 
-import Navigation from './Navigation' ; 
-import Login from './Login' ; 
-import Meeting from './Meeting' ; 
-import Register from './Register' ;
+import Home from './Components/Home/Home' ; 
+import Welcome from './Components/Welcome/Welcome' ; 
+import Navigation from './Components/Navigation/Navigation' ; 
+import Login from './Components/Login/Login' ; 
+import Meeting from './Components/Meeting/Meeting' ; 
+import Register from './Components/Register/Register' ;
 
 
 
