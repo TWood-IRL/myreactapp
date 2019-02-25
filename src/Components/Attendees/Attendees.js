@@ -6,10 +6,17 @@ class Attendees extends Component{
     constructor(props){
         super(props) ; 
         this.state = {  
-            displayAttendees: []  
-        } ; 
+            displayAttendees: []  ,
+            searchQuery: '' 
 
+        } ; 
+        this.handleChange = this.handleChange.bind(this) ; 
       
+    }
+    handleChange(e){
+        const itemName = e.target.name ; 
+        const itemValue = e.target.value ; 
+        this.setState({[itemName]: itemValue}) ; 
     }
     componentDidMount(){
         const ref = firebase.database().ref(`meetings/${this.props.userID}/${this.props.meetingID}/attendees`) ; 
@@ -29,12 +36,18 @@ class Attendees extends Component{
             }
             this.setState({
                 displayAttendees:attendeesList
-            }) ; 
+            }) ;
+            
+            
         })
     }
   
     render(){
 
+        const dataFilter = item => item.attendeeName
+        .toLowerCase()
+        .match(this.state.searchQuery.toLocaleLowerCase())  && true; 
+        const filteredAttendees = this.state.displayAttendees.filter(dataFilter); 
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
@@ -42,13 +55,19 @@ class Attendees extends Component{
                     <h1 className="font-weight-light text-center">
                         Attendees
                     </h1>
+                    <div className="card bg-light mb-4" >
+                        <div className="card-body text-center">
+                            <input  type="text" name="searchQuery" value={this.state.searchQuery} placeholder="Search Attendees" className="form-control" onChange={this.handleChange}   />
+                        </div> 
+                    </div>
+
                     </div>
                 </div>
                 <AttendeesList 
                     adminUser={this.props.adminUser}
                     meetingID={this.props.meetingID}
                     userID={this.props.userID} 
-                    attendees={this.state.displayAttendees}
+                    attendees={filteredAttendees}
                     />
            </div>
         ) ; 
