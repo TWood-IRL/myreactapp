@@ -15,11 +15,12 @@ class Attendees extends Component{
         const ref = firebase.database().ref(`meetings/${this.props.userID}/${this.props.meetingID}/attendees`) ; 
 
         ref.on("value", snapshot => {
-            let attendees = snapshot.val() ; 
+            let attendees = snapshot.val() ;
+ 
             let attendeesList = [] ; 
             for(let item in attendees){
                 attendeesList.push({
-                    attendeeID: attendees[item].attendeeID, 
+                    attendeeID: item, 
                     attendeeName: attendees[item].attendeeName, 
                     attendeeEmail: attendees[item].attendeeEmail 
                     
@@ -43,10 +44,11 @@ class Attendees extends Component{
                     </div>
                 </div>
                 <AttendeesList 
-                adminUser={this.props.adminUser}
-                meetingID={this.props.meetingID}
-                userID={this.props.userID} 
-                attendees={this.state.displayAttendees}/>
+                    adminUser={this.props.adminUser}
+                    meetingID={this.props.meetingID}
+                    userID={this.props.userID} 
+                    attendees={this.state.displayAttendees}
+                    />
            </div>
         ) ; 
     }
