@@ -10,6 +10,7 @@ import Navigation from './Components/Navigation/Navigation' ;
 import Login from './Components/Login/Login' ; 
 import Meeting from './Components/Meeting/Meeting' ; 
 import Register from './Components/Register/Register' ;
+import CheckIn from './Components/Meeting/CheckIn' ;
 
 
 
@@ -124,6 +125,8 @@ class App extends Component {
           addMeeting={this.addMeeting} 
           userID={this.state.userID}
           meetings={this.state.meetings}
+          /> 
+          <CheckIn path="/checkin/:userID/:meetingID"  
           /> 
           <Register path="/register"  registerUser={this.registerUser}/> 
           <Login path="/login"  /> 
